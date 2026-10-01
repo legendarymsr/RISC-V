@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 # ~/.profile — minimal shell env for a riscv64 Alpine box (busybox ash).
 # No zsh/tmux/etc. here on purpose: slow silicon, keep it tiny.
 [ -f /etc/profile ] && . /etc/profile

@@ -1,4 +1,5 @@
 #!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
 # ~/.config/bspwm/panel — minimal lemonbar for bspwm.
 # Left: desktops (focused highlighted, occupied normal, empty dimmed).
 # Right: clock. Event-driven via `bspc subscribe` — no polling, easy on a U74.
