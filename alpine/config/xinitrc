@@ -1,5 +1,4 @@
 #!/bin/sh
-# SPDX-License-Identifier: GPL-3.0-or-later
 # ~/.xinitrc — load the Tokyo Night colors, then start bspwm. That's it.
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 exec bspwm

@@ -1,5 +1,4 @@
 #!/bin/sh
-# SPDX-License-Identifier: GPL-3.0-or-later
 # =============================================================================
 # alpine/setup.sh — minimal Alpine riscv64 desktop (StarFive VisionFive 2, or
 # any riscv64 box): bspwm + xterm + vis + lynx. Dead simple.
