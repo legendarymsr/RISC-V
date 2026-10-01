@@ -108,6 +108,36 @@ If you care about owning your stack end to end — open ISA, open OS, open
 tooling, no proprietary layer you're forced to accept — RISC-V is the only one of
 the two that lets you go all the way down. That's why it's here.
 
+## "Free" means *free as in freedom* — and why every board differs
+
+Worth nailing down, because it's the whole philosophy. RISC-V being "free" does
+**not** mean the hardware is cheap or the silicon is gratis — a VisionFive 2
+costs real money, and plenty of RISC-V cores are commercial products you license
+and pay for. What's free is the **ISA itself**: it's **unpatented and
+un-owned**. Nobody holds the instruction set, nobody can patent-troll an
+implementation of it, and no company can tell you you're not allowed to build,
+modify, or extend a chip around it. *Libre*, not *zero-price* — free as in
+**not proprietary**, not free as in beer.
+
+A direct consequence worth bracing for: **there is no "the RISC-V platform."**
+Because anyone can design a RISC-V SoC however they like — their own extensions,
+boot ROM, firmware, peripherals, memory map — **every board boots differently.**
+There's no RISC-V equivalent of the PC's standardized UEFI/ACPI world that lets
+one image boot any machine. So:
+
+- Flashing/boot steps are **per board.** The VisionFive 2 in this repo has its
+  own U-Boot, boot-mode switches, and device tree; a SiFive HiFive, Milk-V
+  Mars/Jupiter, Pine64 Star64, or Lichee Pi does it differently. Always read
+  *that* board's docs for the firmware/kernel/bootloader bring-up.
+- What **does** transfer is the software above the firmware: a `riscv64` Linux
+  userland (like Alpine's) runs on any application-class board that follows the
+  profiles. The kernel + device tree + bootloader is the part you re-learn per
+  board; the OS and configs on top are portable.
+
+That's the trade for having no gatekeeper — freedom at the ISA level buys a less
+uniform hardware world. It's a feature, but it means "how do I flash my RISC-V
+board?" has no one answer.
+
 ## What's here
 
 | dir | board / target | stack |
