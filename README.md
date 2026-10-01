@@ -177,4 +177,7 @@ See each directory's `README.md` for the install steps.
 - [*The RISC-V Reader*](http://riscvbook.com/) (Patterson & Waterman) — the
   friendly book-length intro by the architecture's creators.
 - [Awesome RISC-V](https://github.com/xmpf/awesome-risc-v) — a curated list of
-  cores, tools, emulators, docs, and software.
+  cores, tools, emulators, docs, and software. **Heads up:** it's ~7 years old and
+  RISC-V moves *fast*, so treat it as a starting map, not current truth — cross-check
+  anything important (profiles, toolchain/kernel support, board status) against newer
+  docs.
