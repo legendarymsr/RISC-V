@@ -1,0 +1,42 @@
+# ~/.config/sxhkd/sxhkdrc — keybinds (Super = mod). Dead simple.
+# Launchers open things in xterm because lynx/vis are terminal programs.
+
+# terminal
+super + Return
+	xterm
+
+# launcher — bemenu (dmenu-alike, themed by these flags at runtime, no rebuild)
+super + p
+	bemenu-run -nb '#1a1b26' -nf '#c0caf5' -hb '#7aa2f7' -hf '#1a1b26' -fn 'JetBrainsMono Nerd Font 11'
+
+# browser (lynx) and editor (vis), each in a terminal
+super + w
+	xterm -e lynx
+super + e
+	xterm -e vis
+
+# close / kill focused window
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# desktops 1–5: focus / send-to
+super + {1-5}
+	bspc desktop -f '^{1-5}'
+super + shift + {1-5}
+	bspc node -d '^{1-5}'
+
+# focus by direction (vim keys)
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+# tiled / fullscreen
+super + {t,f}
+	bspc node -t {tiled,fullscreen}
+
+# restart bspwm / quit / reload sxhkd
+super + shift + r
+	bspc wm -r
+super + shift + Escape
+	bspc quit
+super + Escape
+	pkill -USR1 -x sxhkd

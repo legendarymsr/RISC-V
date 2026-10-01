@@ -99,23 +99,26 @@ Once Alpine boots and you're at a root shell, clone this repo and run:
 apk add git
 git clone https://github.com/legendarymsr/RISC-V
 cd RISC-V/alpine
-TARGET_USER=legend KEYMAP=se ./setup.sh
+TARGET_USER=legend ./setup.sh
 ```
 
-`setup.sh` enables the community repo, `apk add`s the whole stack (**no compilation**),
-creates your user, and drops the runtime dotfiles:
+`setup.sh` is dead simple: it enables the community repo, `apk add`s the whole
+stack (**no compilation**), creates your user, and **symlinks** the dotfiles from
+[`config/`](config/) into your home. Because they're symlinks, editing a file in
+the repo changes the live config immediately — keep the clone around.
 
-| thing | package | config (runtime) |
-|-------|---------|------------------|
-| **bspwm** + **sxhkd** | `bspwm sxhkd` | `~/.config/bspwm/bspwmrc`, `~/.config/sxhkd/sxhkdrc` |
-| **xterm** | `xterm` | `~/.Xresources` (Tokyo Night — st's `config.h` as a dotfile) |
-| **bemenu** | `bemenu` | dmenu-alike, themed by launch flags at runtime (no config.h) |
-| **vis** | `vis` | `~/.config/vis/visrc.lua` + Tokyo Night theme (vendored in `alpine/vis/`) |
+| thing | package | dotfile (symlinked from `config/`) |
+|-------|---------|------------------------------------|
+| **bspwm** + **sxhkd** | `bspwm sxhkd` | `config/bspwm/bspwmrc`, `config/sxhkd/sxhkdrc` → `~/.config/…` |
+| **xterm** | `xterm` | `config/Xresources` → `~/.Xresources` (Tokyo Night) |
+| **bemenu** | `bemenu` | dmenu-alike, themed by launch flags in `sxhkdrc` (runtime, no config.h) |
+| **vis** | `vis` | `config/vis/visrc.lua` + Tokyo Night theme → `~/.config/vis/` |
 | **lynx** | `lynx` | — |
-| **vi** (busybox) | (base) | `$EXINIT` in `~/.profile` |
-| **Xorg** | `xorg-server xinit xf86-input-libinput xf86-video-fbdev` | `~/.xinitrc` → `exec bspwm` |
+| **vi** (busybox) | (base) | `$EXINIT` in `config/profile` → `~/.profile` |
+| **Xorg** | `xorg-server xinit xf86-input-libinput xf86-video-fbdev` | `config/xinitrc` → `~/.xinitrc` (`exec bspwm`) |
 
-Then log in as your user and:
+**Keyboard layout** lives in `config/bspwm/bspwmrc` (`setxkbmap se`) — edit that one
+line to `us`/`de`/whatever. Then log in as your user and:
 
 ```sh
 startx
@@ -127,10 +130,12 @@ reload bspwm · `shift+Escape` quit · `Escape` reload sxhkd.
 
 ## Notes
 
-- **No compiling, ever.** Tweaks are dotfile edits: colors in `~/.Xresources`
-  (`xrdb -merge ~/.Xresources` to reload), binds in `sxhkdrc` (`super+Escape` reloads).
-- The **Tokyo Night** palette matches the rest of legenddots (st/dwm/Termux) — same
-  colors, delivered at runtime instead of baked into a binary.
+- **No compiling, ever.** Every tweak is a dotfile edit in [`config/`](config/)
+  (the symlinks mean it's instantly live): colors in `config/Xresources`
+  (`xrdb -merge ~/.Xresources` to reload), binds in `config/sxhkd/sxhkdrc`
+  (`super+Escape` reloads), WM in `config/bspwm/bspwmrc` (`super+shift+r` restarts).
+- The **Tokyo Night** palette is the same one used across my `legenddots`
+  (st/Termux), delivered here purely at runtime instead of baked into a binary.
 - **vis** uses the same name-based Tokyo Night theme as Termux, so it renders through
   xterm's palette and works regardless of vis's color-depth support.
 - Want a status bar? `apk add lemonbar` (binary) and launch it from `bspwmrc` — kept
