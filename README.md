@@ -160,10 +160,15 @@ See each directory's `README.md` for the install steps.
 **My hardware**
 - [StarFive VisionFive 2](https://doc-en.rvspace.org/) — RVspace docs hub for the
   board (U-Boot, kernel, images).
-- [VisionFive 2 on the Alpine wiki](https://wiki.alpinelinux.org/wiki/Main_Page)
-  — search "VisionFive" for the current riscv64 install notes.
-- [Debian RISC-V port](https://wiki.debian.org/RISC-V) and
-  [Fedora RISC-V](https://fedoraproject.org/wiki/Architectures/RISC-V) — handy
+- [Alpine `Riscv64` wiki](https://wiki.alpinelinux.org/wiki/Riscv64) — the official
+  riscv64 page, and prebuilt VF2 SD images at
+  [dev.alpinelinux.org/~mps/riscv64/](https://dev.alpinelinux.org/~mps/riscv64/).
+- [Alpine on VisionFive (arvanta)](https://arvanta.net/alpine/alpine-on-visionfive/)
+  and [ruyisdk VisionFive/Alpine](https://github.com/ruyisdk/support-matrix/blob/main/VisionFive/Alpine/README.md)
+  — concrete VF2 install walkthroughs.
+- [Gentoo VF2 wiki](https://wiki.gentoo.org/wiki/StarFive_VisionFive_2),
+  [Debian RISC-V](https://wiki.debian.org/RISC-V), and
+  [Ubuntu VF2](https://wiki.ubuntu.com/RISC-V/StarFive%20VisionFive%202) — handy
   cross-references when a board quirk isn't documented on Alpine.
 
 **Learn the ISA**
@@ -171,5 +176,5 @@ See each directory's `README.md` for the install steps.
   if you want to read the actual instruction encodings.
 - [*The RISC-V Reader*](http://riscvbook.com/) (Patterson & Waterman) — the
   friendly book-length intro by the architecture's creators.
-- [Awesome RISC-V](https://github.com/riscvarchive/awesome-risc-v) — a curated
-  list of cores, tools, boards, and software.
+- [Awesome RISC-V](https://github.com/xmpf/awesome-risc-v) — a curated list of
+  cores, tools, emulators, docs, and software.
