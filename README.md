@@ -183,8 +183,10 @@ See each directory's `README.md` for the install steps.
   and [ruyisdk VisionFive/Alpine](https://github.com/ruyisdk/support-matrix/blob/main/VisionFive/Alpine/README.md)
   — concrete VF2 install walkthroughs.
 - **Gentoo** — [RISC-V hub](https://wiki.gentoo.org/wiki/Category:RISC-V) (general,
-  all boards + the ABI/hardware pages) and the
-  [VisionFive 2 page](https://wiki.gentoo.org/wiki/StarFive_VisionFive_2) specifically.
+  all boards + the ABI/hardware pages), the
+  [VisionFive 2 page](https://wiki.gentoo.org/wiki/StarFive_VisionFive_2) specifically,
+  and the [RISC-V downloads](https://www.gentoo.org/downloads/riscv/) (stage3s for
+  every RV64/RV32 ABI + bootable QCOW2 VM images) — if you *do* want to suffer.
   Linked not because I'd run Gentoo *on* the board (see
   ["Why not Gentoo?"](#why-not-gentoo)), but because Gentoo's docs are **fucking
   amazing** and routinely the clearest writeup of a board's quirks anywhere.
