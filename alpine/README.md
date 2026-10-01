@@ -26,8 +26,27 @@ no compositing, which dwm-class WMs + a terminal don't need. Don't install `pico
 > board flashes differently — see ["Every board is different"](#every-board-is-different)
 > at the bottom. Don't copy VF2 switch positions or `mtd` layouts onto another board.
 
-Alpine has no turnkey VF2 image, so getting the *base* booting is the fiddly part and
-depends on your kernel/U-Boot choices. The shape of it:
+### Easiest: flash the prebuilt VF2 image
+
+An Alpine dev (mps) publishes **ready-made riscv64 SD images**, VisionFive 2
+included — so you can skip hand-rolling the kernel/U-Boot entirely:
+
+```sh
+# on your host — check the device with lsblk, wrong target = wiped disk
+wget https://dev.alpinelinux.org/~mps/riscv64/visionfive-v2-mmc.img.xz
+xz -dc visionfive-v2-mmc.img.xz | doas dd of=/dev/sdX bs=4M conv=fsync status=progress
+```
+
+Set the boot switches to boot from SD (see the table below), insert, power on. It
+boots a working Alpine riscv64; log in, then `setup-alpine` + `setup-disk` to move
+it onto NVMe/eMMC and enable the **community** repo. This is by far the least
+painful path — [other boards' images are in the same directory](https://dev.alpinelinux.org/~mps/riscv64/)
+(VF1, SpaceMIT K1, BPI-F3…).
+
+### Or roll it yourself (the fiddly way)
+
+If you want a custom kernel, or there's no prebuilt image for your board, do it
+by hand. The shape of it:
 
 1. **U-Boot / SPL** — the VF2 boots a two-stage U-Boot (SPL → OpenSBI + U-Boot
    proper) out of its onboard **QSPI flash**. U-Boot is what then loads an OS off
@@ -35,13 +54,16 @@ depends on your kernel/U-Boot choices. The shape of it:
    it updated. This is the main first-day hurdle.
 2. **Kernel + device tree** — HDMI display needs the JH7110 DRM driver, which is in
    **mainline ≥ 6.6**. Use a recent mainline kernel (cleaner) or StarFive's vendor
-   fork (more peripheral coverage). Match it with the VF2 `.dtb`.
-3. **Alpine rootfs** — put an Alpine **riscv64** (edge) rootfs on the NVMe/eMMC, then
+   fork (more peripheral coverage). Match it with the VF2 `.dtb`. Alpine's VF2
+   kernel/U-Boot recipes live at
+   [gitlab.alpinelinux.org/nmeum/alpine-visionfive](https://gitlab.alpinelinux.org/nmeum/alpine-visionfive).
+3. **Alpine rootfs** — put an Alpine **riscv64** rootfs on the NVMe/eMMC, then
    run `setup-alpine` for the base (hostname, network, users, `apk` mirror) and
    `setup-disk` to install it properly. Enable the **community** repo.
 
-Cross-check the current StarFive VF2 + Alpine-riscv wiki pages for exact U-Boot/kernel
-versions — they move fast.
+The official [**Alpine riscv64 wiki page**](https://wiki.alpinelinux.org/wiki/Riscv64)
+and this [**VisionFive 1/2 walkthrough**](https://arvanta.net/alpine/alpine-on-visionfive/)
+have the current specifics — cross-check them, the details move fast.
 
 ### Flashing the VisionFive 2 (concretely)
 
