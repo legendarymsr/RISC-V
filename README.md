@@ -115,3 +115,31 @@ the two that lets you go all the way down. That's why it's here.
 | [`alpine/`](alpine/) | StarFive **VisionFive 2** (JH7110, `RV64GC`) | Alpine riscv64 · bspwm + xterm + vis + lynx — all binary `apk`, zero compilation |
 
 See each directory's `README.md` for the install steps.
+
+## Further reading
+
+**The standard**
+- [RISC-V International](https://riscv.org/) — the non-profit that stewards the ISA.
+- [Specifications](https://riscv.org/technical/specifications/) — the official
+  spec documents (the unprivileged ISA is the one to start with; the privileged
+  spec covers supervisor/hypervisor modes).
+- [RVA profiles](https://github.com/riscv/riscv-profiles) — the `RVA22`/`RVA23`
+  profiles that pin down what application-class chips must implement (the
+  anti-fragmentation answer).
+
+**My hardware**
+- [StarFive VisionFive 2](https://doc-en.rvspace.org/) — RVspace docs hub for the
+  board (U-Boot, kernel, images).
+- [VisionFive 2 on the Alpine wiki](https://wiki.alpinelinux.org/wiki/Main_Page)
+  — search "VisionFive" for the current riscv64 install notes.
+- [Debian RISC-V port](https://wiki.debian.org/RISC-V) and
+  [Fedora RISC-V](https://fedoraproject.org/wiki/Architectures/RISC-V) — handy
+  cross-references when a board quirk isn't documented on Alpine.
+
+**Learn the ISA**
+- [riscv-isa-manual](https://github.com/riscv/riscv-isa-manual) — the spec source,
+  if you want to read the actual instruction encodings.
+- [*The RISC-V Reader*](http://riscvbook.com/) (Patterson & Waterman) — the
+  friendly book-length intro by the architecture's creators.
+- [Awesome RISC-V](https://github.com/riscvarchive/awesome-risc-v) — a curated
+  list of cores, tools, boards, and software.
