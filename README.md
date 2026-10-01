@@ -182,14 +182,19 @@ See each directory's `README.md` for the install steps.
 - [Alpine on VisionFive (arvanta)](https://arvanta.net/alpine/alpine-on-visionfive/)
   and [ruyisdk VisionFive/Alpine](https://github.com/ruyisdk/support-matrix/blob/main/VisionFive/Alpine/README.md)
   — concrete VF2 install walkthroughs.
-- [Gentoo VF2 wiki](https://wiki.gentoo.org/wiki/StarFive_VisionFive_2) — linked
-  not because I'd run Gentoo *on* the board (see ["Why not Gentoo?"](#why-not-gentoo)),
-  but because Gentoo's docs are **fucking amazing** and routinely the clearest
-  writeup of a board's quirks anywhere. If you can't install Gentoo after reading
-  their handbook, you probably shouldn't have a computer.
-- [Debian RISC-V](https://wiki.debian.org/RISC-V) and
+- **Gentoo** — [RISC-V hub](https://wiki.gentoo.org/wiki/Category:RISC-V) (general,
+  all boards + the ABI/hardware pages) and the
+  [VisionFive 2 page](https://wiki.gentoo.org/wiki/StarFive_VisionFive_2) specifically.
+  Linked not because I'd run Gentoo *on* the board (see
+  ["Why not Gentoo?"](#why-not-gentoo)), but because Gentoo's docs are **fucking
+  amazing** and routinely the clearest writeup of a board's quirks anywhere.
+  Honestly, Gentoo's docs should cover whatever you're stuck on. If you can't
+  install Gentoo after reading their handbook, you probably shouldn't have a computer.
+- [Fedora RISC-V](https://fedoraproject.org/wiki/Architectures/RISC-V)
+  ([hardware/boards](https://fedoraproject.org/wiki/Architectures/RISC-V/Hardware)),
+  [Debian RISC-V](https://wiki.debian.org/RISC-V), and
   [Ubuntu VF2](https://wiki.ubuntu.com/RISC-V/StarFive%20VisionFive%202) — more
-  cross-references when a board quirk isn't documented on Alpine.
+  cross-references, though per the above, Gentoo's docs have usually already got it.
 
 **Learn the ISA**
 - [riscv-isa-manual](https://github.com/riscv/riscv-isa-manual) — the spec source,
