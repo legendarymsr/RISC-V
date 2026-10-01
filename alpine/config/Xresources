@@ -1,3 +1,4 @@
+! SPDX-License-Identifier: GPL-3.0-or-later
 ! ~/.Xresources — Tokyo Night for xterm (runtime config; no config.h, no rebuild).
 ! Loaded by ~/.xinitrc via `xrdb -merge`. This is st's config.h, moved to a
 ! runtime dotfile so it fits a slow RISC-V board.
