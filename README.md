@@ -193,8 +193,9 @@ See each directory's `README.md` for the install steps.
 - [Fedora RISC-V](https://fedoraproject.org/wiki/Architectures/RISC-V)
   ([hardware/boards](https://fedoraproject.org/wiki/Architectures/RISC-V/Hardware)),
   [Debian RISC-V](https://wiki.debian.org/RISC-V), and
-  [Ubuntu VF2](https://wiki.ubuntu.com/RISC-V/StarFive%20VisionFive%202) — more
-  cross-references, though per the above, Gentoo's docs have usually already got it.
+  [Ubuntu RISC-V downloads](https://ubuntu.com/download/risc-v) (VF2 preinstalled
+  images + install guide) — more cross-references, though per the above, Gentoo's
+  docs have usually already got it.
 
 **Learn the ISA**
 - [riscv-isa-manual](https://github.com/riscv/riscv-isa-manual) — the spec source,
