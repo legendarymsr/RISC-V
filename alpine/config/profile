@@ -1,0 +1,8 @@
+# ~/.profile — minimal shell env for a riscv64 Alpine box (busybox ash).
+# No zsh/tmux/etc. here on purpose: slow silicon, keep it tiny.
+[ -f /etc/profile ] && . /etc/profile
+
+# busybox vi reads $EXINIT (not ~/.exrc) — sane editing defaults.
+export EXINIT='set autoindent shiftwidth=4 tabstop=4 showmatch number'
+export EDITOR=vis
+export PATH="$HOME/.local/bin:$PATH"
