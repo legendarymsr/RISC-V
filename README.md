@@ -182,9 +182,13 @@ See each directory's `README.md` for the install steps.
 - [Alpine on VisionFive (arvanta)](https://arvanta.net/alpine/alpine-on-visionfive/)
   and [ruyisdk VisionFive/Alpine](https://github.com/ruyisdk/support-matrix/blob/main/VisionFive/Alpine/README.md)
   — concrete VF2 install walkthroughs.
-- [Gentoo VF2 wiki](https://wiki.gentoo.org/wiki/StarFive_VisionFive_2),
-  [Debian RISC-V](https://wiki.debian.org/RISC-V), and
-  [Ubuntu VF2](https://wiki.ubuntu.com/RISC-V/StarFive%20VisionFive%202) — handy
+- [Gentoo VF2 wiki](https://wiki.gentoo.org/wiki/StarFive_VisionFive_2) — linked
+  not because I'd run Gentoo *on* the board (see ["Why not Gentoo?"](#why-not-gentoo)),
+  but because Gentoo's docs are **fucking amazing** and routinely the clearest
+  writeup of a board's quirks anywhere. If you can't install Gentoo after reading
+  their handbook, you probably shouldn't have a computer.
+- [Debian RISC-V](https://wiki.debian.org/RISC-V) and
+  [Ubuntu VF2](https://wiki.ubuntu.com/RISC-V/StarFive%20VisionFive%202) — more
   cross-references when a board quirk isn't documented on Alpine.
 
 **Learn the ISA**
