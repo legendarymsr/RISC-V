@@ -209,3 +209,9 @@ See each directory's `README.md` for the install steps.
   RISC-V moves *fast*, so treat it as a starting map, not current truth — cross-check
   anything important (profiles, toolchain/kernel support, board status) against newer
   docs.
+
+## License
+
+**GPL-3.0-or-later** — GNU General Public License, version 3 or (at your option)
+any later version. Full text in [`LICENSE`](LICENSE). Fitting for a repo whose
+whole premise is open, unencumbered, libre computing.
