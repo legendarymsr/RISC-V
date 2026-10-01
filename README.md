@@ -7,6 +7,22 @@ The guiding idea: RISC-V silicon is slow, so **nothing gets compiled**. Where
 `legenddots` leans on suckless source builds (`config.h` → recompile), the RISC-V
 boxes use **binary packages** themed entirely through runtime dotfiles.
 
+## Why not Gentoo?
+
+I daily-drive Gentoo (and Exherbo) — source-based, compile-the-world systems, and
+I love them *on hardware that can take it*. This board is a 1.5 GHz quad SiFive
+U74. Emerging a desktop, let alone `@world`, on that would be **overnight builds
+for a single package set**, every update a small eternity, the fans — well, there
+are no fans — the *heatsink* quietly weeping.
+
+I don't hate myself **that** much.
+
+So on RISC-V I do the opposite of my usual: **Alpine**, prebuilt `riscv64` binary
+packages, zero compilation. Same minimalist taste (bspwm, vis, lynx, Tokyo Night),
+delivered without turning a dev board into a space heater. Source-based distros are
+a joy when `make -j` finishes before you've finished your coffee; on slow silicon
+they're a sentence. Right tool, right hardware.
+
 ## What is RISC-V?
 
 An **ISA** — an *instruction set architecture*, the contract between the

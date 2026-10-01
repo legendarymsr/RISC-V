@@ -6,9 +6,10 @@ idea *adapted to slow silicon*: on a 1.5 GHz SiFive U74, the suckless "just reco
 `config.h`" loop is misery, so the terminal is themed via `~/.Xresources`, the WM via
 runtime `~/.config`, and vis via Lua. No source builds, no GPU/compositor.
 
-> **Why not Gentoo/Exherbo here?** Those are my daily-driver, source-based systems.
-> On a VF2 a full source distro means overnight compiles. Alpine's prebuilt riscv64
-> packages install in seconds — the right tool for the hardware.
+> **Why not Gentoo/Exherbo here?** Those are my daily-driver, source-based systems —
+> and I don't hate myself enough to `emerge` the world on a 1.5 GHz U74 (overnight
+> builds for one package set). Alpine's prebuilt riscv64 packages install in seconds.
+> Right tool, right hardware — see the main [README](../README.md#why-not-gentoo).
 
 ## Hardware
 
