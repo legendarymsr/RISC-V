@@ -1,5 +1,4 @@
 #!/bin/sh
-# SPDX-License-Identifier: GPL-3.0-or-later
 # ~/.config/bspwm/bspwmrc — minimal bspwm for a slow riscv64 board.
 # No compositor (software/fbdev rendering — the VF2 GPU driver is a mess and a
 # tiling WM + terminal don't need one). Tokyo Night. A tiny lemonbar on top.

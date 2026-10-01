@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: GPL-3.0-or-later
 # ~/.config/sxhkd/sxhkdrc — keybinds (Super = mod). Dead simple.
 # Launchers open things in xterm because lynx/vis are terminal programs.
 
