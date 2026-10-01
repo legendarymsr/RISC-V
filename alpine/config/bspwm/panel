@@ -1,0 +1,40 @@
+#!/bin/sh
+# ~/.config/bspwm/panel — minimal lemonbar for bspwm.
+# Left: desktops (focused highlighted, occupied normal, empty dimmed).
+# Right: clock. Event-driven via `bspc subscribe` — no polling, easy on a U74.
+#
+# Font note: Alpine's lemonbar is the NON-Xft build, so it uses X core/bitmap
+# fonts (not TrueType) and defaults to "fixed", which works everywhere. For
+# Terminus instead: `apk add font-terminus` and append to the lemonbar line, e.g.
+#   -f '-*-terminus-medium-r-normal-*-14-*-*-*-*-*-*-*'
+
+FIFO="${XDG_RUNTIME_DIR:-/tmp}/bspwm-panel.fifo"
+rm -f "$FIFO"; mkfifo "$FIFO"
+
+# Tokyo Night
+BG='#1a1b26'; FG='#c0caf5'; HL='#7aa2f7'; DIM='#414868'
+
+# two writers into one fifo: bspwm's desktop report, and a 20s clock tick
+bspc subscribe report > "$FIFO" &
+while :; do printf 'T%s\n' "$(date '+%a %d %b  %H:%M')"; sleep 20; done > "$FIFO" &
+
+desktops=""; clock=""
+while read -r line; do
+  case "$line" in
+    T*) clock="${line#T}" ;;
+    W*)
+      desktops=""; rest="${line#W}"
+      OIFS=$IFS; IFS=':'
+      for item in $rest; do
+        name="${item#?}"
+        case "$item" in
+          O*|F*|U*) desktops="$desktops%{B$HL}%{F$BG} $name %{B-}%{F-}" ;;  # focused
+          o*|u*)    desktops="$desktops%{F$FG} $name %{F-}" ;;              # occupied
+          f*)       desktops="$desktops%{F$DIM} $name %{F-}" ;;            # empty
+        esac
+      done
+      IFS=$OIFS ;;
+    *) continue ;;
+  esac
+  printf '%%{l}%s%%{r} %s \n' "$desktops" "$clock"
+done < "$FIFO" | lemonbar -p -g x22 -B "$BG" -F "$FG"

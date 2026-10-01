@@ -36,7 +36,7 @@ say "installing the desktop (binary packages)"
 apk add \
   xorg-server xinit xf86-input-libinput xf86-video-fbdev \
   xrdb setxkbmap xsetroot \
-  bspwm sxhkd bemenu xterm vis lynx \
+  bspwm sxhkd bemenu lemonbar xterm vis lynx \
   || warn "core install had issues — check the apk output above"
 # bemenu's X11 renderer (sometimes a separate subpackage; may already be bundled)
 apk add bemenu-x11 2>/dev/null || true
