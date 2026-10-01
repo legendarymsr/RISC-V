@@ -110,6 +110,7 @@ the repo changes the live config immediately — keep the clone around.
 | thing | package | dotfile (symlinked from `config/`) |
 |-------|---------|------------------------------------|
 | **bspwm** + **sxhkd** | `bspwm sxhkd` | `config/bspwm/bspwmrc`, `config/sxhkd/sxhkdrc` → `~/.config/…` |
+| **lemonbar** | `lemonbar` | `config/bspwm/panel` — tiny panel: desktops + clock, `bspc subscribe`-driven |
 | **xterm** | `xterm` | `config/Xresources` → `~/.Xresources` (Tokyo Night) |
 | **bemenu** | `bemenu` | dmenu-alike, themed by launch flags in `sxhkdrc` (runtime, no config.h) |
 | **vis** | `vis` | `config/vis/visrc.lua` + Tokyo Night theme → `~/.config/vis/` |
@@ -138,8 +139,13 @@ reload bspwm · `shift+Escape` quit · `Escape` reload sxhkd.
   (st/Termux), delivered here purely at runtime instead of baked into a binary.
 - **vis** uses the same name-based Tokyo Night theme as Termux, so it renders through
   xterm's palette and works regardless of vis's color-depth support.
-- Want a status bar? `apk add lemonbar` (binary) and launch it from `bspwmrc` — kept
-  out by default to stay minimal.
+- The **panel** is a ~30-line `config/bspwm/panel` feeding **lemonbar**: desktops
+  on the left (focused highlighted, empty dimmed), clock on the right, updated by
+  `bspc subscribe` (event-driven, no polling). Edit that file to change it; nuke a
+  segment by deleting its block. Alpine's lemonbar is the non-Xft build (bitmap
+  fonts only) — it defaults to `fixed`; see the note at the top of `panel` for
+  using Terminus instead. Don't want a bar at all? Delete the panel lines from
+  `bspwmrc` and drop `top_padding`.
 
 ## Every board is different
 

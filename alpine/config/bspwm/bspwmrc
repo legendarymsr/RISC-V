@@ -1,15 +1,22 @@
 #!/bin/sh
 # ~/.config/bspwm/bspwmrc — minimal bspwm for a slow riscv64 board.
 # No compositor (software/fbdev rendering — the VF2 GPU driver is a mess and a
-# tiling WM + terminal don't need one). Tokyo Night borders.
+# tiling WM + terminal don't need one). Tokyo Night. A tiny lemonbar on top.
 
 sxhkd &                 # the keybind daemon (see ../sxhkd/sxhkdrc)
 setxkbmap se            # keyboard layout — change 'se' to yours (us, de, …)
 xsetroot -solid '#1a1b26'
 
+# minimal lemonbar panel (desktops + clock). Kill any old one first so
+# super+shift+r (restart) doesn't stack bars.
+pkill -x lemonbar 2>/dev/null
+pkill -f '/bspwm/panel' 2>/dev/null
+"$HOME/.config/bspwm/panel" &
+
 bspc monitor -d 1 2 3 4 5
 bspc config border_width         2
 bspc config window_gap           6
+bspc config top_padding          22       # room for the lemonbar panel
 bspc config normal_border_color  "#1a1b26"
 bspc config focused_border_color "#7aa2f7"
 bspc config focus_follows_pointer true
