@@ -6,3 +6,9 @@
 export EXINIT='set autoindent shiftwidth=4 tabstop=4 showmatch number'
 export EDITOR=vis
 export PATH="$HOME/.local/bin:$PATH"
+
+# lynx: Tokyo Night stylesheet + vi keys (config/lynx). LYNX_CFG replaces
+# /etc/lynx.cfg (ours INCLUDEs it). Only export if present — lynx refuses to
+# start when LYNX_LSS points at a missing file.
+[ -r "$HOME/.config/lynx/lynx.cfg" ] && export LYNX_CFG="$HOME/.config/lynx/lynx.cfg"
+[ -r "$HOME/.config/lynx/lynx.lss" ] && export LYNX_LSS="$HOME/.config/lynx/lynx.lss"

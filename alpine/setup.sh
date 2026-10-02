@@ -61,6 +61,7 @@ mkdir -p "$UH/.config"
 ln -sfn "$DOTS/bspwm"      "$UH/.config/bspwm"
 ln -sfn "$DOTS/sxhkd"      "$UH/.config/sxhkd"
 ln -sfn "$DOTS/vis"        "$UH/.config/vis"
+ln -sfn "$DOTS/lynx"       "$UH/.config/lynx"   # Tokyo Night + vi keys (LYNX_CFG/LYNX_LSS set in profile)
 ln -sfn "$DOTS/Xresources" "$UH/.Xresources"
 ln -sfn "$DOTS/xinitrc"    "$UH/.xinitrc"
 ln -sfn "$DOTS/profile"    "$UH/.profile"
@@ -74,7 +75,7 @@ fi
 
 chown "$TARGET_USER:$TARGET_USER" "$UH/.config" 2>/dev/null || true
 chown -h "$TARGET_USER:$TARGET_USER" \
-  "$UH/.config/bspwm" "$UH/.config/sxhkd" "$UH/.config/vis" \
+  "$UH/.config/bspwm" "$UH/.config/sxhkd" "$UH/.config/vis" "$UH/.config/lynx" \
   "$UH/.Xresources" "$UH/.xinitrc" "$UH/.profile" 2>/dev/null || true
 
 say "done"

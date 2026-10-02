@@ -137,7 +137,7 @@ the repo changes the live config immediately — keep the clone around.
 | **xterm** | `xterm` | `config/Xresources` → `~/.Xresources` (Tokyo Night) |
 | **bemenu** | `bemenu` | dmenu-alike, themed by launch flags in `sxhkdrc` (runtime, no config.h) |
 | **vis** | `vis` | `config/vis/visrc.lua` + Tokyo Night theme → `~/.config/vis/` |
-| **lynx** | `lynx` | — |
+| **lynx** | `lynx` | `config/lynx/lynx.cfg` + `lynx.lss` → `~/.config/lynx/` (Tokyo Night, vi keys; `LYNX_CFG`/`LYNX_LSS` set in `config/profile`) |
 | **vi** (busybox) | (base) | `$EXINIT` in `config/profile` → `~/.profile` |
 | **Xorg** | `xorg-server xinit xf86-input-libinput xf86-video-fbdev` | `config/xinitrc` → `~/.xinitrc` (`exec bspwm`) |
 
@@ -158,6 +158,15 @@ reload bspwm · `shift+Escape` quit · `Escape` reload sxhkd.
   (the symlinks mean it's instantly live): colors in `config/Xresources`
   (`xrdb -merge ~/.Xresources` to reload), binds in `config/sxhkd/sxhkdrc`
   (`super+Escape` reloads), WM in `config/bspwm/bspwmrc` (`super+shift+r` restarts).
+- **lynx** is riced in [`config/lynx/`](config/lynx/): `lynx.lss` maps Tokyo Night onto
+  the 16 ANSI colours xterm already gets from `Xresources` (links blue, current link a
+  blue bar, headings magenta/blue/cyan, code green, status bar on gray). `lynx.cfg`
+  includes `/etc/lynx.cfg`, turns on **vi keys** (`h` back · `j`/`k` links · `l`
+  follow), plus `g`/`G` top/bottom, `^D`/`^U` half-page, `o` open URL, `O` edit
+  URL, `u`/`U` back/forward, `c` options, `/` `n` `N` search. Form fields need
+  `Enter` before typing (so `j`/`k` never land in a text box). Start page is
+  DuckDuckGo Lite; cookies are accepted silently but kept in RAM only. Lynx has
+  no "visited link" colour, so `V` lists visited links instead.
 - The **Tokyo Night** palette is the same one used across my `legenddots`
   (st/Termux), delivered here purely at runtime instead of baked into a binary.
 - **vis** uses the same name-based Tokyo Night theme as Termux, so it renders through

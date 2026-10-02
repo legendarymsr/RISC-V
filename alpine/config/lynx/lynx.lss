@@ -1,0 +1,113 @@
+# ~/.config/lynx/lynx.lss — Tokyo Night for lynx (color-style), via $LYNX_LSS.
+# lynx is curses: it can only name the 16 ANSI colours. xterm maps those to
+# Tokyo Night through ../Xresources, so the names below ARE the palette:
+#   black     color0  #15161e     gray          color8  #414868
+#   red       color1  #f7768e     brightred     color9  #f7768e
+#   green     color2  #9ece6a     brightgreen   color10 #9ece6a
+#   brown     color3  #e0af68     yellow        color11 #e0af68
+#   blue      color4  #7aa2f7     brightblue    color12 #7aa2f7
+#   magenta   color5  #bb9af7     brightmagenta color13 #bb9af7
+#   cyan      color6  #7dcfff     brightcyan    color14 #7dcfff
+#   lightgray color7  #a9b1d6     white         color15 #c0caf5
+#   default = terminal fg/bg (#c0caf5 on #1a1b26)
+# NB: never use "black" as a BACKGROUND here. lynx caches colour pairs with
+# default and black in the same slot, so e.g. blue:black would silently turn
+# every plain blue link blue-on-black. Bars/menus sit on gray (#414868).
+# Format: ELEMENT:MONO-ATTR:FG[:BG]  (FG may carry attrs, e.g. bold+magenta)
+
+default:normal:default:default
+normal:normal:default:default
+
+# links — blue; the current link is a blue pill
+a:bold:blue
+alink:reverse:black:blue
+# lynx has no "visited link" style (it doesn't colour visited links at all);
+# the V key lists them instead.
+
+# chrome
+status:normal:white:gray
+alert:bold:black:red
+title:normal:magenta
+whereis:reverse:black:yellow
+forwbackw.arrow:normal:gray
+hot.paste:normal:red
+label:normal:gray
+candy:normal:gray
+value:normal:green
+
+# headings (tokyonight.nvim-ish markdown ramp)
+h1:bold:bold+magenta
+h2:bold:bold+blue
+h3:bold:bold+cyan
+h4:bold:green
+h5:bold:yellow
+h6:bold:lightgray
+
+# text
+em:bold:cyan
+i:bold:cyan
+cite:normal:cyan
+strong:bold:bold+yellow
+b:bold:bold+yellow
+u:underline:underline+default
+code:normal:green
+tt:normal:green
+kbd:normal:green
+samp:normal:green
+pre:normal:green
+blockquote:normal:lightgray
+q:normal:lightgray
+del:normal:gray
+strike:normal:gray
+ins:normal:green
+hr:normal:gray
+img:dim:gray
+fig:normal:gray
+caption:normal:lightgray
+address:normal:magenta
+li:normal:default
+dt:bold:bold+blue
+small:normal:lightgray
+sup:normal:yellow
+sub:normal:yellow
+
+# forms
+input:normal:cyan
+input.submit:bold:bold+blue
+textarea:normal:cyan
+select:normal:cyan
+edit.active:bold:black:cyan
+edit.active.pad:normal:black:cyan
+edit.active.arrow:bold:red:cyan
+edit.active.marked:reverse:black:yellow
+edit.current:normal:cyan
+edit.prompt:normal:default:gray
+edit.prompt.pad:normal:lightgray:gray
+edit.prompt.arrow:bold:red:gray
+edit.prompt.marked:reverse:black:yellow
+
+# popup menus (options / select boxes)
+menu.bg:normal:default:gray
+menu.frame:normal:blue:gray
+menu.entry:normal:white:gray
+menu.n:normal:yellow:gray
+menu.active:normal:black:blue
+menu.sb:normal:blue:gray
+
+# scrollbar (SCROLLBAR:TRUE in options)
+scroll.bar:normal:blue:gray
+scroll.back:normal:lightgray:gray
+scroll.arrow:normal:blue:gray
+scroll.noarrow:normal:lightgray:gray
+
+# view source (\ key)
+span.htmlsrc_comment:normal:gray
+span.htmlsrc_tag:normal:red
+span.htmlsrc_attrib:normal:cyan
+span.htmlsrc_attrval:normal:green
+span.htmlsrc_abracket:normal:lightgray
+span.htmlsrc_entity:normal:yellow
+span.htmlsrc_badseq:bold:bold+red
+span.htmlsrc_badtag:bold:bold+red
+span.htmlsrc_badattr:bold:bold+red
+span.htmlsrc_sgmlspecial:normal:magenta
