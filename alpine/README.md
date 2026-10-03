@@ -163,7 +163,9 @@ reload bspwm · `shift+Escape` quit · `Escape` reload sxhkd.
   blue bar, headings magenta/blue/cyan, code green, status bar on gray). `lynx.cfg`
   includes `/etc/lynx.cfg`, turns on **vi keys** (`h` back · `j`/`k` links · `l`
   follow), plus `g`/`G` top/bottom, `^D`/`^U` half-page, `o` open URL, `O` edit
-  URL, `u`/`U` back/forward, `c` options, `/` `n` `N` search. Form fields need
+  URL, `u`/`U` back/forward, `c` options, `/` `n` `N` search, and `s` for search
+  shortcuts (`s` `d` asks for a query and searches DuckDuckGo Lite, `s` `?` lists them;
+  `config/lynx/jumps.html`, linked to `/etc/lynx-jumps.html` by `setup.sh`). Form fields need
   `Enter` before typing (so `j`/`k` never land in a text box). Start page is
   DuckDuckGo Lite; cookies are accepted silently but kept in RAM only. Lynx has
   no "visited link" colour, so `V` lists visited links instead.

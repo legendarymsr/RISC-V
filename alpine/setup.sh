@@ -62,6 +62,7 @@ ln -sfn "$DOTS/bspwm"      "$UH/.config/bspwm"
 ln -sfn "$DOTS/sxhkd"      "$UH/.config/sxhkd"
 ln -sfn "$DOTS/vis"        "$UH/.config/vis"
 ln -sfn "$DOTS/lynx"       "$UH/.config/lynx"   # Tokyo Night + vi keys (LYNX_CFG/LYNX_LSS set in profile)
+ln -sfn "$DOTS/lynx/jumps.html" /etc/lynx-jumps.html   # lynx search shortcuts (needs an absolute path)
 ln -sfn "$DOTS/Xresources" "$UH/.Xresources"
 ln -sfn "$DOTS/xinitrc"    "$UH/.xinitrc"
 ln -sfn "$DOTS/profile"    "$UH/.profile"
