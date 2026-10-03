@@ -9,6 +9,11 @@ xterm*saveLines:   8192
 xterm*scrollBar:   false
 xterm*metaSendsEscape: true
 xterm*selectToClipboard: true
+! sixel graphics, for w3m's inline images (img2sixel). xterm only draws sixel
+! when it plays a VT340; give it 256 colour registers instead of the VT340's 16.
+! (The colours/fonts below are untouched — this only adds the graphics mode.)
+xterm*decTerminalID:     vt340
+xterm*numColorRegisters: 256
 
 ! Tokyo Night palette
 xterm*background:  #1a1b26

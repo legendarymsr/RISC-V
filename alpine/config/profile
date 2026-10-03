@@ -12,3 +12,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # start when LYNX_LSS points at a missing file.
 [ -r "$HOME/.config/lynx/lynx.cfg" ] && export LYNX_CFG="$HOME/.config/lynx/lynx.cfg"
 [ -r "$HOME/.config/lynx/lynx.lss" ] && export LYNX_LSS="$HOME/.config/lynx/lynx.lss"
+
+# start page for w3m (d / ^_ go home) and lynx: DuckDuckGo Lite
+export WWW_HOME=https://lite.duckduckgo.com/lite/

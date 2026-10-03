@@ -1,7 +1,7 @@
 #!/bin/sh
 # =============================================================================
 # alpine/setup.sh — minimal Alpine riscv64 desktop (StarFive VisionFive 2, or
-# any riscv64 box): bspwm + xterm + vis + lynx. Dead simple.
+# any riscv64 box): bspwm + xterm + vis + lynx/w3m. Dead simple.
 #
 # EVERYTHING is a binary apk — ZERO compilation (recompiling on a 1.5 GHz U74
 # is misery). The "dots" live as real files in ./config and get SYMLINKED into
@@ -36,8 +36,11 @@ say "installing the desktop (binary packages)"
 apk add \
   xorg-server xinit xf86-input-libinput xf86-video-fbdev \
   xrdb setxkbmap xsetroot \
-  bspwm sxhkd bemenu lemonbar xterm vis lynx links \
+  bspwm sxhkd bemenu lemonbar xterm vis lynx w3m \
   || warn "core install had issues — check the apk output above"
+# w3m's inline images go out as sixel via img2sixel (Alpine's w3mimgdisplay is
+# framebuffer-only, useless under X) — see config/w3m/config
+apk add libsixel-tools || warn "no libsixel-tools — w3m will run without images"
 # bemenu's X11 renderer (sometimes a separate subpackage; may already be bundled)
 apk add bemenu-x11 2>/dev/null || true
 # font: prefer JetBrains Mono Nerd (icons), fall back to Terminus (tiny, fast)
@@ -63,6 +66,7 @@ ln -sfn "$DOTS/sxhkd"      "$UH/.config/sxhkd"
 ln -sfn "$DOTS/vis"        "$UH/.config/vis"
 ln -sfn "$DOTS/lynx"       "$UH/.config/lynx"   # Tokyo Night + vi keys (LYNX_CFG/LYNX_LSS set in profile)
 ln -sfn "$DOTS/lynx/jumps.html" /etc/lynx-jumps.html   # lynx search shortcuts (needs an absolute path)
+ln -sfn "$DOTS/w3m"        "$UH/.w3m"           # Tokyo Night + sixel images (w3m only reads ~/.w3m)
 ln -sfn "$DOTS/Xresources" "$UH/.Xresources"
 ln -sfn "$DOTS/xinitrc"    "$UH/.xinitrc"
 ln -sfn "$DOTS/profile"    "$UH/.profile"
@@ -77,9 +81,9 @@ fi
 chown "$TARGET_USER:$TARGET_USER" "$UH/.config" 2>/dev/null || true
 chown -h "$TARGET_USER:$TARGET_USER" \
   "$UH/.config/bspwm" "$UH/.config/sxhkd" "$UH/.config/vis" "$UH/.config/lynx" \
-  "$UH/.Xresources" "$UH/.xinitrc" "$UH/.profile" 2>/dev/null || true
+  "$UH/.w3m" "$UH/.Xresources" "$UH/.xinitrc" "$UH/.profile" 2>/dev/null || true
 
 say "done"
 printf '%bLog in as %s and run: startx%b\n' "$GRN" "$TARGET_USER" "$NC"
-printf 'Keys: super+Return xterm · super+d bemenu · super+b lynx · super+e vis · super+shift+Esc quit\n'
+printf 'Keys: super+Return xterm · super+d bemenu · super+b lynx · super+w w3m · super+e vis · super+shift+Esc quit\n'
 printf 'The dots are symlinked from %s — edit there and the change is live.\n' "$DOTS"

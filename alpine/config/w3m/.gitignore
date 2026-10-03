@@ -1,0 +1,9 @@
+# w3m writes history, cookies and bookmarks into ~/.w3m (= this directory).
+# Track only the config.
+*
+!.gitignore
+!config
+!keymap
+!urimethodmap
+!cgi-bin/
+!cgi-bin/ddg.cgi

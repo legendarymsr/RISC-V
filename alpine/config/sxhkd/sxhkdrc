@@ -1,5 +1,5 @@
 # ~/.config/sxhkd/sxhkdrc — keybinds (Super = mod). Dead simple.
-# Launchers open things in xterm because lynx/vis are terminal programs.
+# Launchers open things in xterm because lynx/w3m/vis are terminal programs.
 
 # terminal
 super + Return
@@ -9,9 +9,11 @@ super + Return
 super + d
 	bemenu-run -nb '#1a1b26' -nf '#c0caf5' -hb '#7aa2f7' -hf '#1a1b26' -fn 'JetBrainsMono Nerd Font 11'
 
-# browser (lynx) and editor (vis), each in a terminal
+# browsers (lynx; w3m for images/tabs) and editor (vis), each in a terminal
 super + b
 	xterm -e lynx
+super + w
+	xterm -e w3m
 super + e
 	xterm -e vis
 
