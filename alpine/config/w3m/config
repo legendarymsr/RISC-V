@@ -65,3 +65,6 @@ show_cookie 0
 editor vis
 # keep page/image temp files out of the repo (~/.w3m is a symlink into it)
 tmp_dir ~/.cache/w3m
+# ask for uncompressed pages: GitHub sends gzip+chunked even to w3m's HTTP/1.0
+# requests and w3m 0.5.6 then chokes ("gunzip: invalid magic"). Costs some bandwidth.
+accept_encoding identity
