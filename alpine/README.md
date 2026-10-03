@@ -152,6 +152,33 @@ startx
 close/kill · `{1-5}` desktops · `{h,j,k,l}` focus · `t`/`f` tiled/fullscreen · `shift+r`
 reload bspwm · `shift+Escape` quit · `Escape` reload sxhkd.
 
+## Why lynx?
+
+Because modern browsers are bloated JavaScript crap, and this board has better
+things to do with its RAM.
+
+Firefox and Chromium are tens of millions of lines of code that want gigabytes of
+memory, a process per tab and a JIT JavaScript engine. Those engines are tuned for
+x86 and ARM first, so on riscv64 they're slow, half-ported or missing entirely. And
+most of what they spend that effort on isn't the page you came for: today's sites
+ship megabytes of framework code, trackers, ads and analytics just to show you some
+text. Every byte of that has to be downloaded, parsed, compiled, run and kept in
+memory before you can read a single paragraph. That's a huge amount of CPU and RAM,
+and a huge attack surface, for what's mostly reading.
+
+lynx skips all of it. It's a small C program that fetches the HTML, runs no
+JavaScript at all and renders the text in a terminal. It starts instantly, lives in a
+few megabytes of RAM, is perfectly happy on a slow RISC-V core, and never runs a
+tracking script, autoplays a video or pops up a cookie banner. It also fits the rest
+of this desktop: like bspwm, xterm and vis it's tiny and keyboard-driven, and with vi
+keys (`h` `j` `k` `l`) and `s` `d` for DuckDuckGo Lite it drives exactly like
+everything else here.
+
+The trade-off is honest: sites that are nothing but JavaScript (web apps, many
+logins, single-page apps) won't work. For docs, wikis, man pages, forums, mailing
+list archives and search, which is what a machine like this is for, lynx is all
+you need.
+
 ## Notes
 
 - **No compiling, ever.** Every tweak is a dotfile edit in [`config/`](config/)
