@@ -80,5 +80,5 @@ chown -h "$TARGET_USER:$TARGET_USER" \
 
 say "done"
 printf '%bLog in as %s and run: startx%b\n' "$GRN" "$TARGET_USER" "$NC"
-printf 'Keys: super+Return xterm · super+p bemenu · super+w lynx · super+e vis · super+shift+Esc quit\n'
+printf 'Keys: super+Return xterm · super+d bemenu · super+b lynx · super+e vis · super+shift+Esc quit\n'
 printf 'The dots are symlinked from %s — edit there and the change is live.\n' "$DOTS"
