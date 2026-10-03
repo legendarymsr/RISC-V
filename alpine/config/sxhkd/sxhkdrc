@@ -6,11 +6,11 @@ super + Return
 	xterm
 
 # launcher — bemenu (dmenu-alike, themed by these flags at runtime, no rebuild)
-super + p
+super + d
 	bemenu-run -nb '#1a1b26' -nf '#c0caf5' -hb '#7aa2f7' -hf '#1a1b26' -fn 'JetBrainsMono Nerd Font 11'
 
 # browser (lynx) and editor (vis), each in a terminal
-super + w
+super + b
 	xterm -e lynx
 super + e
 	xterm -e vis

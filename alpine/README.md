@@ -148,7 +148,7 @@ line to `us`/`de`/whatever. Then log in as your user and:
 startx
 ```
 
-**Keys** (Super = mod): `Return` xterm · `p` bemenu · `w` lynx · `e` vis · `q`/`shift+q`
+**Keys** (Super = mod): `Return` xterm · `d` bemenu · `b` lynx · `e` vis · `q`/`shift+q`
 close/kill · `{1-5}` desktops · `{h,j,k,l}` focus · `t`/`f` tiled/fullscreen · `shift+r`
 reload bspwm · `shift+Escape` quit · `Escape` reload sxhkd.
 
