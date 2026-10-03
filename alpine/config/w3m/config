@@ -1,0 +1,67 @@
+# ~/.w3m/config — w3m, riced: Tokyo Night + sixel inline images.
+# setup.sh symlinks this whole directory to ~/.w3m. Checked against Alpine's
+# w3m 0.5.6 (built with image support; `w3m -show-option` lists every knob).
+# One option per line, "name value". No trailing comments: w3m only skips
+# lines that START with #.
+
+# ── look: Tokyo Night ─────────────────────────────────────────────────────────
+# w3m can only name the 8 ANSI colours. xterm maps those to Tokyo Night
+# through ../Xresources, so the names below ARE the palette:
+#   red #f7768e · green #9ece6a · yellow #e0af68 · blue #7aa2f7
+#   magenta #bb9af7 · cyan #7dcfff · white #a9b1d6
+#   terminal = xterm's own fg/bg (#c0caf5 on #1a1b26)
+color 1
+basic_color terminal
+bg_color terminal
+# links blue, visited magenta, the link under the cursor cyan
+anchor_color blue
+visited_anchor 1
+visited_color magenta
+active_style 1
+active_color cyan
+# image links / alt text green, form fields yellow, marks red
+image_color green
+form_color yellow
+mark_color red
+
+# ── inline images: sixel ──────────────────────────────────────────────────────
+# Alpine builds w3m's w3mimgdisplay for the Linux framebuffer only (no X11
+# backend), so the classic "draw over the xterm window" trick can't work here.
+# Sixel can: w3m pipes each image through img2sixel (libsixel-tools) and xterm
+# draws it, because ../Xresources puts xterm in vt340 mode with 256 colour
+# registers. Protocols: 0 w3mimgdisplay · 1 mlterm · 2 sixel · 3 iTerm2 · 4 kitty.
+inline_img_protocol 2
+display_image 1
+auto_image 1
+max_load_image 2
+ext_image_viewer 0
+image_scale 100
+pseudo_inlines 1
+
+# ── keys ──────────────────────────────────────────────────────────────────────
+# w3m's defaults are already vi-ish (h j k l, g/G, / n N); the few extras are
+# in ./keymap (~/.w3m/keymap, read automatically). q quits without asking.
+vi_prec_num 1
+confirm_qq 0
+
+# ── search: `U` then `ddg:riscv vector` searches DuckDuckGo Lite ──────────────
+# ./urimethodmap (read automatically) sends ddg: to the tiny ./cgi-bin/ddg.cgi.
+# U starts empty (like lynx's o); Up in the prompt recalls the current URL
+# (or the link under the cursor).
+default_url 0
+cgi_bin ~/.w3m/cgi-bin:/usr/lib/w3m/cgi-bin
+
+# ── sane defaults ────────────────────────────────────────────────────────────
+# the start page (DuckDuckGo Lite) comes from $WWW_HOME, set in config/profile
+display_charset UTF-8
+document_charset UTF-8
+system_charset UTF-8
+follow_locale 0
+open_tab_blank 1
+display_link_number 0
+use_cookie 1
+accept_cookie 1
+show_cookie 0
+editor vis
+# keep page/image temp files out of the repo (~/.w3m is a symlink into it)
+tmp_dir ~/.cache/w3m

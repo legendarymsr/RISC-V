@@ -1,0 +1,16 @@
+# ~/.w3m/keymap — loaded on top of w3m's defaults, which are already vi-ish:
+# h j k l move · g G top/bottom · / ? n N search · B back · U open URL ·
+# TAB next link · Enter follow · T new tab · { } prev/next tab · s buffers ·
+# o options · H help · q quit. Just a few extras here.
+
+# ^D/^U half-page, like vis and lynx (stock ^U is "previous link" — shift+TAB
+# still does that)
+keymap C-d NEXT_HALF_PAGE
+keymap C-u PREV_HALF_PAGE
+# t opens a URL in a new tab, x closes the tab
+keymap t TAB_GOTO
+keymap x CLOSE_TAB
+# d = DuckDuckGo Lite (the $WWW_HOME start page)
+keymap d GOTO_HOME
+# X toggles inline images (for slow pages / slow links)
+keymap X SET_OPTION display_image=toggle

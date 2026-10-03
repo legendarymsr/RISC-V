@@ -1,6 +1,6 @@
 # alpine — minimal Alpine riscv64 desktop (StarFive VisionFive 2)
 
-A deliberately tiny desktop for a **RISC-V** board: **bspwm + xterm + vis + lynx**,
+A deliberately tiny desktop for a **RISC-V** board: **bspwm + xterm + vis + lynx/w3m**,
 every piece a **binary `apk` package — nothing compiled**. This is the KISS/suckless
 idea *adapted to slow silicon*: on a 1.5 GHz SiFive U74, the suckless "just recompile
 `config.h`" loop is misery, so the terminal is themed via `~/.Xresources`, the WM via
@@ -134,11 +134,11 @@ the repo changes the live config immediately — keep the clone around.
 |-------|---------|------------------------------------|
 | **bspwm** + **sxhkd** | `bspwm sxhkd` | `config/bspwm/bspwmrc`, `config/sxhkd/sxhkdrc` → `~/.config/…` |
 | **lemonbar** | `lemonbar` | `config/bspwm/panel` — tiny panel: desktops + clock, `bspc subscribe`-driven |
-| **xterm** | `xterm` | `config/Xresources` → `~/.Xresources` (Tokyo Night) |
+| **xterm** | `xterm` | `config/Xresources` → `~/.Xresources` (Tokyo Night; VT340 mode so it draws sixel images) |
 | **bemenu** | `bemenu` | dmenu-alike, themed by launch flags in `sxhkdrc` (runtime, no config.h) |
 | **vis** | `vis` | `config/vis/visrc.lua` + Tokyo Night theme → `~/.config/vis/` |
 | **lynx** | `lynx` | `config/lynx/lynx.cfg` + `lynx.lss` → `~/.config/lynx/` (Tokyo Night, vi keys; `LYNX_CFG`/`LYNX_LSS` set in `config/profile`) |
-| **links** | `links` | second text browser, stock config (better tables/frames; `Esc` menu) |
+| **w3m** | `w3m libsixel-tools` | `config/w3m/` → `~/.w3m` (Tokyo Night, inline images as sixel via `img2sixel`, tabs; start page from `WWW_HOME` in `config/profile`) |
 | **vi** (busybox) | (base) | `$EXINIT` in `config/profile` → `~/.profile` |
 | **Xorg** | `xorg-server xinit xf86-input-libinput xf86-video-fbdev` | `config/xinitrc` → `~/.xinitrc` (`exec bspwm`) |
 
@@ -149,7 +149,7 @@ line to `us`/`de`/whatever. Then log in as your user and:
 startx
 ```
 
-**Keys** (Super = mod): `Return` xterm · `d` bemenu · `b` lynx · `e` vis · `q`/`shift+q`
+**Keys** (Super = mod): `Return` xterm · `d` bemenu · `b` lynx · `w` w3m · `e` vis · `q`/`shift+q`
 close/kill · `{1-5}` desktops · `{h,j,k,l}` focus · `t`/`f` tiled/fullscreen · `shift+r`
 reload bspwm · `shift+Escape` quit · `Escape` reload sxhkd.
 
@@ -175,15 +175,20 @@ of this desktop: like bspwm, xterm and vis it's tiny and keyboard-driven, and wi
 keys (`h` `j` `k` `l`) and `s` `d` for DuckDuckGo Lite it drives exactly like
 everything else here.
 
-**links** is installed too, as a second text browser for the same job. It's just as
-small and JS-free, but draws tables and frames better than lynx and has drop-down
-menus (`Esc`), so it's the fallback when a page's layout trips lynx up. Run it as
-`links <url>` in an xterm.
+**w3m** is installed too, as the second text browser. Same idea, no JavaScript, a
+few megabytes of RAM, but it lays pages out more like a real browser (tables side
+by side instead of stacked), has **tabs**, and shows **images inline** right in the
+xterm. So lynx is the fast reader, and w3m is what you open when the pictures or
+the layout actually matter (a diagram, a board photo, a pinout). Hit `super+w`, or
+run `w3m` (opens DuckDuckGo Lite) or `w3m <url>` in an xterm. Its defaults are
+already vi-ish (`h` `j` `k` `l`, `g`/`G`, `/` `n` `N`, `B` back, `U` open URL, `T`
+new tab, `{`/`}` switch tabs), and `U` then `ddg:riscv vector` searches DuckDuckGo
+Lite.
 
 The trade-off is honest: sites that are nothing but JavaScript (web apps, many
 logins, single-page apps) won't work. For docs, wikis, man pages, forums, mailing
-list archives and search, which is what a machine like this is for, lynx (or
-links) is all you need.
+list archives and search, which is what a machine like this is for, lynx and
+w3m are all you need.
 
 ## Notes
 
@@ -202,6 +207,22 @@ links) is all you need.
   `Enter` before typing (so `j`/`k` never land in a text box). Start page is
   DuckDuckGo Lite; cookies are accepted silently but kept in RAM only. Lynx has
   no "visited link" colour, so `V` lists visited links instead.
+- **w3m** is riced in [`config/w3m/`](config/w3m/), symlinked to `~/.w3m` (the only
+  place w3m looks). `config` names the 8 ANSI colours xterm already maps to Tokyo
+  Night: links blue, visited links magenta, the link under the cursor cyan, image
+  links green, form fields yellow, marks red, text and background straight from
+  the terminal. **Images** are sixel: Alpine builds `w3mimgdisplay` for the Linux
+  framebuffer only (no X11 backend), so the classic draw-over-the-window trick
+  can't work under X. Instead w3m pipes each picture through `img2sixel`
+  (`libsixel-tools`) and xterm draws it, which needs xterm in VT340 mode with 256
+  colour registers (`decTerminalID`/`numColorRegisters` in `config/Xresources`,
+  colours and font unchanged). PNG, JPEG and GIF work; SVG and WebP show their alt
+  text. `keymap` adds `^D`/`^U` half-page, `t` open URL in a new tab, `x` close
+  tab, `d` back to DuckDuckGo Lite and `X` images on/off. `U` starts empty (`Up`
+  recalls the current URL or the link under the cursor), so `U` `ddg:<query>` is
+  a quick search (`urimethodmap` + `cgi-bin/ddg.cgi`). History and cookies land
+  in `config/w3m/` but are git-ignored; page and image temp files go to
+  `~/.cache/w3m`.
 - The **Tokyo Night** palette is the same one used across my `legenddots`
   (st/Termux), delivered here purely at runtime instead of baked into a binary.
 - **vis** uses the same name-based Tokyo Night theme as Termux, so it renders through
