@@ -138,6 +138,7 @@ the repo changes the live config immediately — keep the clone around.
 | **bemenu** | `bemenu` | dmenu-alike, themed by launch flags in `sxhkdrc` (runtime, no config.h) |
 | **vis** | `vis` | `config/vis/visrc.lua` + Tokyo Night theme → `~/.config/vis/` |
 | **lynx** | `lynx` | `config/lynx/lynx.cfg` + `lynx.lss` → `~/.config/lynx/` (Tokyo Night, vi keys; `LYNX_CFG`/`LYNX_LSS` set in `config/profile`) |
+| **links** | `links` | second text browser, stock config (better tables/frames; `Esc` menu) |
 | **vi** (busybox) | (base) | `$EXINIT` in `config/profile` → `~/.profile` |
 | **Xorg** | `xorg-server xinit xf86-input-libinput xf86-video-fbdev` | `config/xinitrc` → `~/.xinitrc` (`exec bspwm`) |
 
@@ -174,10 +175,15 @@ of this desktop: like bspwm, xterm and vis it's tiny and keyboard-driven, and wi
 keys (`h` `j` `k` `l`) and `s` `d` for DuckDuckGo Lite it drives exactly like
 everything else here.
 
+**links** is installed too, as a second text browser for the same job. It's just as
+small and JS-free, but draws tables and frames better than lynx and has drop-down
+menus (`Esc`), so it's the fallback when a page's layout trips lynx up. Run it as
+`links <url>` in an xterm.
+
 The trade-off is honest: sites that are nothing but JavaScript (web apps, many
 logins, single-page apps) won't work. For docs, wikis, man pages, forums, mailing
-list archives and search, which is what a machine like this is for, lynx is all
-you need.
+list archives and search, which is what a machine like this is for, lynx (or
+links) is all you need.
 
 ## Notes
 
