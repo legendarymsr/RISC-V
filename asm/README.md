@@ -7,9 +7,10 @@ in real instructions: `write`/`exit`/`read`/`openat`, `div`/`rem` from the
 **M** extension, the calling convention, argc/argv as the kernel left them
 on the stack.
 
-These are ordinary userspace programs, not bare-metal firmware. They run on
-the VisionFive 2 (or any RV64 Linux) and, on an x86 machine, under
-`qemu-riscv64`.
+The programs in this directory are ordinary Linux userspace programs. They
+run on the VisionFive 2 (or any RV64 Linux) and, on an x86 machine, under
+`qemu-riscv64`. There's also a [bare-metal hello](baremetal/) that skips
+the OS entirely and writes the UART itself.
 
 Assembling a 40-line `.s` file is **not** "compiling the world." `as` and `ld`
 finish in a blink even on the 1.5 GHz U74. That's a different beast from
@@ -23,6 +24,7 @@ emerging a desktop.
 | [`fizzbuzz.s`](fizzbuzz.s) | loops, `div`/`rem` (M extension), integer-to-decimal |
 | [`args.s`](args.s) | `argc`/`argv` as laid out on the stack at `_start` |
 | [`cat.s`](cat.s) | `read` (63), `openat` (56), `close` (57) — stdin or files to stdout |
+| [`baremetal/`](baremetal/) | no OS at all — print to the QEMU `virt` UART and `wfi` |
 
 ## Build and run
 
@@ -102,3 +104,48 @@ then envp[], a NULL, and the auxiliary vector
 
 Useful syscall numbers on **riscv64** Linux (they are *not* the same as on
 x86_64): `openat` 56, `close` 57, `read` 63, `write` 64, `exit` 93.
+
+## Bare metal — no OS, just a UART
+
+[`baremetal/`](baremetal/) is a different tree: no Linux, no syscalls, no
+libc. The program writes `Hello, RISC-V (bare metal)` straight to a 16550
+UART and then sits in `wfi`. You assemble it the same way as the others
+(`as`/`ld`, not compiling the world) and run it in a QEMU *system* VM.
+
+QEMU's `virt` machine puts an NS16550A at `0x10000000` with byte-spaced
+registers. We poll the LSR's THRE bit at `+5`, then write the character to
+the THR at `+0`. That's the whole driver.
+
+Two boot paths, both built by `make`:
+
+| target | load address | privilege | QEMU |
+|--------|--------------|-----------|------|
+| `hello-m.elf` | `0x80000000` | M-mode | `-bios none` — true bare metal, no firmware |
+| `hello-s.elf` | `0x80200000` | S-mode | default OpenSBI, then the kernel — the way the VF2 boots |
+
+```sh
+# Debian/Ubuntu: qemu-system-riscv (and opensbi, for the S-mode path)
+sudo apt install binutils-riscv64-linux-gnu qemu-system-riscv opensbi
+
+cd baremetal
+make
+make run        # qemu-system-riscv64 -machine virt -nographic -bios none -kernel hello-m.elf
+make run-s      # qemu-system-riscv64 -machine virt -nographic -kernel hello-s.elf
+# Ctrl-A x quits QEMU
+```
+
+`-nographic` hooks the UART up to the terminal, so the hello lands on
+stdio. M-mode is just our one line; S-mode prints the OpenSBI banner first,
+then `Domain0 Next Address : 0x80200000` / `Next Mode : S-mode`, then the
+hello. Other harts (if you pass `-smp N`) are parked in `wfi` on the M-mode
+build; OpenSBI only starts the boot hart for S-mode.
+
+![QEMU virt booting the M-mode hello, no firmware](baremetal/screenshot.png)
+
+**On the VisionFive 2:** uart0 really is at `0x10000000` too — that's in the
+JH7110 device tree (`jh7110.dtsi`) and in StarFive's UART docs. But it's a
+Synopsys DW 8250 (`snps,dw-apb-uart`) with `reg-shift = <2>` and
+`reg-io-width = <4>`: the LSR lives at `+0x14`, not `+5`, and accesses are
+32-bit. This program is written for QEMU virt's byte-spaced 16550 and is
+**untested on the board**. Don't flash it expecting the same binary to just
+work.

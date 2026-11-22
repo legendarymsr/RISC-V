@@ -1,0 +1,3 @@
+# build output — the screenshot is the one thing that *is* committed
+*.o
+*.elf
