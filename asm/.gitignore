@@ -1,0 +1,6 @@
+# build output — assemble these on the board or with a cross as/ld
+hello
+fizzbuzz
+args
+cat
+*.o

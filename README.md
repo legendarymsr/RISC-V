@@ -159,8 +159,11 @@ board?" has no one answer.
 | dir | board / target | stack |
 |-----|----------------|-------|
 | [`alpine/`](alpine/) | StarFive **VisionFive 2** (JH7110, `RV64GC`) | Alpine riscv64 · bspwm + xterm + vis + lynx — all binary `apk`, zero compilation |
+| [`asm/`](asm/) | RV64 Linux userspace (the VF2, or `qemu-riscv64` on x86) | Tiny GNU assembler programs — raw syscalls, no libc. Assembling a 40-line `.s` is not compiling the world. |
 
-See each directory's `README.md` for the install steps.
+See each directory's `README.md` for the details. The [`asm/`](asm/) programs
+use the instructions from the [ISA section](#what-is-risc-v) above, so you can
+read `div`/`rem`, `ecall`, and the stack layout in actual code.
 
 ## Further reading
 
